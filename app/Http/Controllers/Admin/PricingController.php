@@ -75,7 +75,8 @@ class PricingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pricing=Pricing::find($id);
+        return view('admin.pricing.edit',compact('pricing'));
     }
 
     /**
@@ -87,7 +88,22 @@ class PricingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'feature'=>'required',
+        ]);
+        $pricing=Pricing::findOrFail();
+        $pricing->name=$request->name;
+        $pricing->description=$request->description;
+        $pricing->price=$request->price;
+        $pricing->feature=$request->feature;
+
+        $pricing->save();
+
+
+        return redirect()->route('admin.pricings.index')->with('success', "pricing save");
     }
 
     /**

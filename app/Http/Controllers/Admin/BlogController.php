@@ -81,7 +81,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $blog=Blog::find($id);
+        return view('admin.blog.edit',compact('blog'));
     }
 
     /**
@@ -93,7 +94,28 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'blog_type'=>'required',
+            'description'=>'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $blog= Blog::findOrFail($id);
+        $blog->title=$request->title;
+        $blog->blog_type=$request->blog_type;
+        $blog->description=$request->description;
+
+        if ($request->file('image')){
+            $file=$request->file('image');
+            $image = time().$file->getClientOriginalName();
+            $file->move('assets/image/blog',$image);           
+            $blog->image = $image;
+        }
+
+        $blog->save();
+
+
+        return redirect()->route('admin.blogs.index')->with('success', "blog save");
     }
 
     /**

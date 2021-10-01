@@ -69,7 +69,8 @@ class LatestworkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $latestwork=Latestwork::find($id);
+        return view('admin.latestwork.edit',compact('latestwork'));
     }
 
     /**
@@ -81,7 +82,16 @@ class LatestworkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+        ]);
+        $latestwork= Latestwork::findOrFail();
+        $latestwork->title=$request->title;
+
+        $latestwork->save();
+
+
+        return redirect()->route('admin.latestworks.index')->with('success', "latestwork save");
     }
 
     /**

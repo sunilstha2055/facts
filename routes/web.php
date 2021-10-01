@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'Front\HomeController@index')->name('index');
+Route::get('/services', 'Front\HomeController@service')->name('service');
+Route::get('/abouts', 'Front\HomeController@about')->name('about');
+Route::get('/solutions', 'Front\HomeController@solution')->name('solution');
+Route::get('/careers', 'Front\HomeController@career')->name('career');
+Route::get('/contacts', 'Front\HomeController@contact')->name('contact');
 
 Auth::routes();
 Route::group(['middleware'=>'auth'],function(){

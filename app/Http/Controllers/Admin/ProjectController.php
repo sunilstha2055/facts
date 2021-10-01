@@ -87,7 +87,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project=Project::find($id);
+        return view('admin.project.edit',compact('project'));
     }
 
     /**
@@ -99,7 +100,30 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'worktitle'=>'required',
+            'latestwork_id'=>'required|exists:App\Models\Latestwork,id',
+            'description'=>'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $project=Project::findOrFail();
+        $project->title=$request->title;
+        $project->worktitle=$request->worktitle;
+        $project->latestwork_id=$request->latestwork_id;
+        $project->description=$request->description;
+
+        if ($request->file('image')){
+            $file=$request->file('image');
+            $image = time().$file->getClientOriginalName();
+            $file->move('assets/image/project',$image);           
+            $project->image = $image;
+        }
+
+        $project->save();
+
+
+        return redirect()->route('admin.projects.index')->with('success', "project save");
     }
 
     /**

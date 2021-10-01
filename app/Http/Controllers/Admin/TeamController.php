@@ -76,7 +76,7 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -87,7 +87,8 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        //
+        $team=Team::find($id);
+        return view('admin.team.edit',compact('team'));
     }
 
     /**
@@ -99,7 +100,34 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'designation'=>'required',
+            'f_username'=>'required',
+            'l_username'=>'required',
+            't_username'=>'required',
+            'i_username'=>'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $team=Team::findOrFail($id);
+        $team->name=$request->name;
+        $team->designation=$request->designation;
+        $team->f_username=$request->f_username;
+        $team->l_username=$request->l_username;
+        $team->t_username=$request->t_username;
+        $team->i_username=$request->i_username;
+
+        if ($request->file('image')){
+            $file=$request->file('image');
+            $image = time().$file->getClientOriginalName();
+            $file->move('assets/image/team',$image);           
+            $team->image = $image;
+        }
+
+        $team->save();
+
+
+        return redirect()->route('admin.teams.index')->with('success', "team save");
     }
 
     /**

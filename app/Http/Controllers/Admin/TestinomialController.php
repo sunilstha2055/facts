@@ -81,7 +81,8 @@ class TestinomialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $testinomial=Testinomial::find($id);
+        return view('admin.testinomial.edit',compact('testinomial'));
     }
 
     /**
@@ -93,7 +94,28 @@ class TestinomialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'postion'=>'required',
+            'description'=>'required',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $testinomial=Testinomial::findOrFail();
+        $testinomial->name=$request->name;
+        $testinomial->postion=$request->postion;
+        $testinomial->description=$request->description;
+
+        if ($request->file('image')){
+            $file=$request->file('image');
+            $image = time().$file->getClientOriginalName();
+            $file->move('assets/image/testinomial',$image);           
+            $testinomial->image = $image;
+        }
+
+        $testinomial->save();
+
+
+        return redirect()->route('admin.testinomials.index')->with('success', "testinomial save");
     }
 
     /**

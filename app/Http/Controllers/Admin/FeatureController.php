@@ -72,7 +72,8 @@ class FeatureController extends Controller
      */
     public function edit($id)
     {
-        //
+        $feature=Feature::find($id);
+        return view('admin.feature.edit',compact('feature'));
     }
 
     /**
@@ -84,7 +85,19 @@ class FeatureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+            'description'=>'required',
+            'icon_name'=>'required',
+        ]);
+        $feature= Feature::findOrFail();
+        $feature->title=$request->title;
+        $feature->description=$request->description;
+        $feature->icon_name=$request->icon_name;
+        
+        $feature->save();
+
+        return redirect()->route('admin.features.index')->with('success', "feature save");
     }
 
     /**

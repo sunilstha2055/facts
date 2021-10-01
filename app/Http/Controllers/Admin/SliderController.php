@@ -44,8 +44,8 @@ class SliderController extends Controller
             'description'=>'required',
             'btn1'=>'required',
             'btn1_link'=>'required',
-            'btn2'=>'',
-            'btn2_link'=>'',
+            'btn2'=>'nullable',
+            'btn2_link'=>'nullable',
             'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $slider=new Slider();
@@ -89,7 +89,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider=Slider::find($id);
+        return view('admin.slider.edit',compact('slider'));
     }
 
     /**
@@ -101,7 +102,36 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title1'=>'required',
+            'title2'=>'required',
+            'description'=>'required',
+            'btn1'=>'required',
+            'btn1_link'=>'required',
+            'btn2'=>'',
+            'btn2_link'=>'',
+            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $slider= Slider::findOrFail($id);
+        $slider->title1=$request->title1;
+        $slider->title2=$request->title2;
+        $slider->description=$request->description;
+        $slider->btn1=$request->btn1;
+        $slider->btn1_link=$request->btn1_link;
+        $slider->btn2=$request->btn2;
+        $slider->btn2_link=$request->btn2_link;
+
+        if ($request->file('image')){
+            $file=$request->file('image');
+            $image = time().$file->getClientOriginalName();
+            $file->move('assets/image/slider',$image);           
+            $slider->image = $image;
+        }
+
+        $slider->save();
+
+
+        return redirect()->route('admin.sliders.index')->with('success', "Slider save");
     }
 
     /**
