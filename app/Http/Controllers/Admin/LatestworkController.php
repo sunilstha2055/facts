@@ -85,7 +85,7 @@ class LatestworkController extends Controller
         $request->validate([
             'title'=>'required',
         ]);
-        $latestwork= Latestwork::findOrFail();
+        $latestwork= Latestwork::findOrFail($id);
         $latestwork->title=$request->title;
 
         $latestwork->save();

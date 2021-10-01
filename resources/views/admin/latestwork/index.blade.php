@@ -68,7 +68,8 @@
                                             {{$sn}}</td>
                                         <td>{{$latestwork->title}}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Edit</a>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{route('admin.latestworks.edit',$latestwork->id)}}">Edit</a>
                                             <a class="btn btn-sm btn-danger" href="">
                                                 <form action="{{route('admin.latestworks.destroy',$latestwork->id)}}"
                                                     method="post">

@@ -94,7 +94,7 @@ class PricingController extends Controller
             'price'=>'required',
             'feature'=>'required',
         ]);
-        $pricing=Pricing::findOrFail();
+        $pricing=Pricing::findOrFail($id);
         $pricing->name=$request->name;
         $pricing->description=$request->description;
         $pricing->price=$request->price;

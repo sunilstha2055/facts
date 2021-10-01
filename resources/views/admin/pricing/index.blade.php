@@ -72,7 +72,8 @@
                                         <td>{{$pricing->description}}</td>
                                         <td>{{$pricing->feature}}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Edit</a>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{route('admin.pricings.edit',$pricing->id)}}">Edit</a>
                                             <a class="btn btn-sm btn-danger" href="">
                                                 <form action="{{route('admin.pricings.destroy',$pricing->id)}}"
                                                     method="post">

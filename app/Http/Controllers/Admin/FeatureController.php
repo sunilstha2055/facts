@@ -90,7 +90,7 @@ class FeatureController extends Controller
             'description'=>'required',
             'icon_name'=>'required',
         ]);
-        $feature= Feature::findOrFail();
+        $feature= Feature::findOrFail($id);
         $feature->title=$request->title;
         $feature->description=$request->description;
         $feature->icon_name=$request->icon_name;

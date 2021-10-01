@@ -80,7 +80,8 @@
                                                 alt="{{$project->title1}}">
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Edit</a>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{route('admin.projects.edit',$project->id)}}">Edit</a>
                                             <a class="btn btn-sm btn-danger" href="">
                                                 <form action="{{route('admin.projects.destroy',$project->id)}}"
                                                     method="post">

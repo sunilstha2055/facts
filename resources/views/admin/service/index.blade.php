@@ -76,7 +76,8 @@
                                                 alt="{{$service->title1}}">
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Edit</a>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{route('admin.services.edit', $service->id)}}">Edit</a>
                                             <a class="btn btn-sm btn-danger" href="">
                                                 <form action="{{route('admin.services.destroy',$service->id)}}"
                                                     method="post">

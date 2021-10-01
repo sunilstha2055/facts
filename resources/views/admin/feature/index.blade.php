@@ -74,7 +74,8 @@
                                             {{$feature->icon_name}}
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Edit</a>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{route('admin.features.edit',$feature->id)}}">Edit</a>
                                             <a class="btn btn-sm btn-danger" href="">
                                                 <form action="{{route('admin.features.destroy',$feature->id)}}"
                                                     method="post">

@@ -97,7 +97,7 @@ class ServiceController extends Controller
             'description'=>'required',
             'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $service=Service::findOrFail();
+        $service=Service::findOrFail($id);
         $service->title=$request->title;
         $service->description=$request->description;
 

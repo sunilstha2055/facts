@@ -88,7 +88,8 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project=Project::find($id);
-        return view('admin.project.edit',compact('project'));
+        $latestworks=Latestwork::all();
+        return view('admin.project.edit',compact('project', 'latestworks'));
     }
 
     /**
@@ -107,7 +108,7 @@ class ProjectController extends Controller
             'description'=>'required',
             'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $project=Project::findOrFail();
+        $project=Project::findOrFail($id);
         $project->title=$request->title;
         $project->worktitle=$request->worktitle;
         $project->latestwork_id=$request->latestwork_id;

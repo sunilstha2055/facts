@@ -100,7 +100,7 @@ class TestinomialController extends Controller
             'description'=>'required',
             'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $testinomial=Testinomial::findOrFail();
+        $testinomial=Testinomial::findOrFail($id);
         $testinomial->name=$request->name;
         $testinomial->postion=$request->postion;
         $testinomial->description=$request->description;

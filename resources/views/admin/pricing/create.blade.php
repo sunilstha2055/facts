@@ -60,16 +60,10 @@
                                             <input type="text" id="feature" name="feature" class="form-control">
                                         </div>
                                     </div>
-                                    Add More feature<span class="fa fa-plus add text-red"></span>
+                                    <!-- Add More feature<span class="fa fa-plus add text-red"></span> -->
                                 </div>
                             </div>
-                            <!-- More Links: <span class="fa fa-plus add"></span>
-                            <div class="appending_div">
-                                <div>
-                                    Link URL: <input type="text" name="blog_linku_one[]"> &nbsp; Link Name: <input
-                                        type="text" name="blog_linkn_one[]">
-                                </div>
-                            </div> -->
+
                             <button class="btn btn-primary" type="submit">Add</button>
                         </form>
                     </div>

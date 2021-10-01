@@ -79,7 +79,8 @@
                                                 alt="{{$testinomial->title1}}">
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="">Edit</a>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{route('admin.testinomials.edit',$testinomial->id)}}">Edit</a>
                                             <a class="btn btn-sm btn-danger" href="">
                                                 <form action="{{route('admin.testinomials.destroy',$testinomial->id)}}"
                                                     method="post">
